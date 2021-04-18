@@ -17,10 +17,8 @@ class CreateUserCartsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('product_id');
-            $table->integer('category_id');
-            $table->decimal('price', 5, 2);
+            $table->decimal('price', 8, 2);
             $table->integer('quantity');
-            $table->String('in_stock');
             $table->timestamps();
         });
     }

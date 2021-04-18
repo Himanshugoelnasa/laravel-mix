@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('category');
             $table->longText('description');
-            $table->decimal('price', 5, 2);
-            $table->integer('make');
+            $table->decimal('price', 8, 2);
+            $table->bigInteger('make');
             $table->timestamps();
         });
     }
