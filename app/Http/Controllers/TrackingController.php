@@ -16,9 +16,15 @@ class TrackingController extends Controller
     public function index(Request $request)
     {
         try{
-
-            $data = Tracking::select(DB::raw("updated_by, count('name') as profile, avg(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) as time"))
+            $connection = config('database.default');
+            if($connection == 'mysql') {
+                $data = Tracking::select('updated_by', DB::raw(" count('name') as profile, avg(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) as time"))
             ->groupBy('updated_by')->get();
+            } else {
+                $data = Tracking::select('updated_by', DB::raw(" count('name') as profile, avg(EXTRACT(EPOCH FROM ('start_time'::timestamp - 'end_time'::timestamp))) as time"))
+            ->groupBy('updated_by')->get();
+            }
+            
             return view('tracking')->with(array('data'=>$data));
 
         } catch(Exception $ex) {
