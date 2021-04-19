@@ -17,7 +17,7 @@ class TrackingController extends Controller
     {
         try{
 
-            $data = Tracking::select(DB::raw("updated_by, count('name') as profile, avg(TIME_TO_SEC(TIMEDIFF(`end_time`, `start_time`))) as time"))
+            $data = Tracking::select(DB::raw("updated_by, count('name') as profile, avg(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) as time"))
             ->groupBy('updated_by')->get();
             return view('tracking')->with(array('data'=>$data));
 
