@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tracking', 'TrackingController@index');
+Route::get('/popup', 'TrackingController@popup');
+
 Route::middleware(['auth:web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
