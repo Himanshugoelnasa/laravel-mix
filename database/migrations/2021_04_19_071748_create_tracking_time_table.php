@@ -16,7 +16,7 @@ class CreateTrackingTimeTable extends Migration
         Schema::create('tracking_time', function (Blueprint $table) {
             $table->id();
             $table->string('name'); 
-            $table->bigInteger('phone');
+            $table->string('phone');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->string('updated_by');
