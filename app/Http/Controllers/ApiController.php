@@ -24,6 +24,7 @@ class ApiController extends Controller
     public function test_api(Request $request)
     {
         $ip = request()->ip();
+        $ip = $this->getClientIPaddress(Request $request);
         if($request->name) {
             $message = "Greetings ".$request->name;
             return response()->json(['ip' => $ip, "message" => $message]);
@@ -32,6 +33,29 @@ class ApiController extends Controller
         }
         
     }
+
+    public function getClientIPaddress(Request $request) {
+
+        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+            $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+            $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        }
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
+
+        if(filter_var($client, FILTER_VALIDATE_IP)){
+            $clientIp = $client;
+        }
+        elseif(filter_var($forward, FILTER_VALIDATE_IP)){
+            $clientIp = $forward;
+        }
+        else{
+            $clientIp = $remote;
+        }
+
+        return $clientIp;
+     }
 
 }
 
