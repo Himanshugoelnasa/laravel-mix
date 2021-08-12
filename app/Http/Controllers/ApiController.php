@@ -25,7 +25,7 @@ class ApiController extends Controller
     {
         $ip = request()->ip();
         if($request->name) {
-            $message = "Greeting ".$request->name;
+            $message = "Greetings ".$request->name;
             return response()->json(['ip' => $ip, "message" => $message]);
         } else {
             return response()->json(['ip' => $ip]);
