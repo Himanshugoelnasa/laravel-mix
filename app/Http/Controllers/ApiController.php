@@ -23,8 +23,8 @@ class ApiController extends Controller
      */
     public function test_api(Request $request)
     {
-        $ip = request()->ip();
-        $ip = $this->getClientIPaddress(Request $request);
+        //$ip = request()->ip();
+        $ip = $this->getClientIPaddress($request);
         if($request->name) {
             $message = "Greetings ".$request->name;
             return response()->json(['ip' => $ip, "message" => $message]);
