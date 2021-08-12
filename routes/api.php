@@ -3,7 +3,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ApiController;
 
 
 // open api route for login
@@ -31,4 +31,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 	Route::get('/userCart', 'LoginController@userCart');
 
 
+});
+
+
+Route::group(['middleware' => 'xHelloWorld'], function () {
+    Route::get('/test-api/', [ApiController::class, 'test_api']);
 });
