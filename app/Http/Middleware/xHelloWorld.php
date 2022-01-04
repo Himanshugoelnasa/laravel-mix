@@ -20,6 +20,6 @@ class xHelloWorld
 
         $response->header('Custom-header', 'x-hello-world');
 
-        return $response;
+        return $next();
     }
 }
